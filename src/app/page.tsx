@@ -2,24 +2,25 @@
 import QRCode from "qrcode.react"
 import { useRef, useState } from "react"
 
-const page = () => {
+const Page = () => {
   const [url, setUrl] = useState<string>('')
-  const [color, setColor] = useState<string>('#000000');
+  const [color, setColor] = useState<string>('#000000')
   const qrRef = useRef<HTMLDivElement>(null)
 
   const downloadQRCode = () => {
-    const canvas = qrRef.current?.querySelector('canvas');
+    const canvas = qrRef.current?.querySelector('canvas')
 
     if (canvas) {
-      const url = canvas.toDataURL('image/png');
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'qrcode.png';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      const url = canvas.toDataURL('image/png')
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'qrcode.png'
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
     }
   }
+
   return (
     <div className="flex flex-col items-center mt-12 px-3">
       <h1 className="text-3xl font-bold mb-6 text-center">URL to QR Code Generator</h1>
@@ -35,6 +36,8 @@ const page = () => {
         <input
           type="color"
           id="color"
+          value={color}
+          onChange={(e) => setColor(e.target.value)}
           className="w-12 h-12 border rounded-lg shadow-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
       </div>
@@ -53,4 +56,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
